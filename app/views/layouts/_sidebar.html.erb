@@ -41,7 +41,7 @@
     <li class="icn_settings"><%= link_to t(:account_settings), account_path %></li>
     <li class="icn_security"><%= link_to t(:stats), stats_path %></li>
     <li class="icn_security"><% if current_user.root? %>
-        <%= link_to t(:sudo), sudo_users_path %>
+        <%= link_to t('sudo.dashboard'), sudo_path %>
     <% end %>
     </li>
     <li class="icn_jump_back"><%= link_to t(:log_out), logout_path %></li>

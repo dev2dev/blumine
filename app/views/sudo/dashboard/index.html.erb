@@ -1,0 +1,43 @@
+<article class="module width_full">
+  <header><h3><%= t(:projects) %></h3></header>
+  <div class="module_content">
+    <table class="tablesorter" cellspacing="0">
+      <thead>
+      <tr>
+        <th class="header" width="20">ID</th>
+        <th class="header" width="80"><%= t(:project_name) %></th>
+        <th class="header" width="80"><%= t(:project_creator) %></th>
+        <th class="header" width="200"><%= t(:created_at) %></th>
+        <th class="header" width="200"><%= t(:updated_at) %></th>
+        <th><%= t(:operations) %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% Project.all.each do |p| %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= link_to p.name, sudo_project_path(p) %></td>
+          <td><%= link_to p.user.name, p.user %></td>
+          <td><%= p.created_at %></td>
+          <td><%= p.updated_at %></td>
+          <td>
+            <%= link_to t(:edit), edit_project_path(p) %>
+            <%= link_to t(:delete), p, :method => :delete, :confirm => t(:delete_confirm) %>
+          </td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</article>
+
+<article class="module width_full">
+  <header><h3><%= t(:people) %></h3></header>
+  <div class="module_content">
+    <%= render 'sudo/users/table', :collection => User.limit(10).order('created_at DESC') %>
+  </div>
+  <footer>
+    <ul class="actions">
+      <li><%= link_to t(:view_all), sudo_users_path, :class => :btn %></li>
+    </ul>
+  </footer>
+</article>

@@ -1,13 +1,13 @@
 Blumine::Application.routes.draw do
   get 'register' => 'users#new'
-  get '/search/:keyword' => 'issues#search'
+  get 'search/:keyword' => 'issues#search'
   get 'rebuild_index' => 'issues#rebuild_index'
-  get '/stats' => "pages#stats"
+  get 'stats' => "pages#stats"
 
-  post '/user_sessions' => "user_sessions#create"
+  post 'user_sessions' => "user_sessions#create"
   get 'logout' => "user_sessions#destroy"
 
-  post '/assigned_issues/sort' => 'issue_assignments#sort'
+  post 'assigned_issues/sort' => 'issue_assignments#sort'
   
   resources :activities, :only => :create
   resources :users, :comments
@@ -21,9 +21,6 @@ Blumine::Application.routes.draw do
     end
     resources :milestones, :documents
   end
-
-  get "milestones/new"
-  post "milestones/create"
 
   resources :issues do
     resources :comments
@@ -54,7 +51,9 @@ Blumine::Application.routes.draw do
   resources :images, :only => [:new, :create, :destroy]
 
   namespace 'sudo' do
-    resources :users
+    get '/' => 'dashboard#index'
+
+    resources :users, :projects, :issues
   end
 
   root :to => "pages#index"

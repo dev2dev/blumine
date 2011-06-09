@@ -25,6 +25,7 @@ en:
   new_project: New Project
   create_project: Create Project
   project_name: Project Name
+  project_creator: Creator
   projects: Projects
   people: People
   new_issue: New Issue
@@ -186,3 +187,11 @@ en:
   views:
     pagination:
       truncate: "..."
+      
+  sudo:
+    dashboard: Dashboard(sudo)
+    manage_user: Manage User
+  
+  view_all: View All
+  creator: Creator
+  planned_date: Planned At

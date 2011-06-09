@@ -26,6 +26,7 @@ zh:
   new_project: 创建新项目
   create_project: 创建新项目
   project_name: 项目名称
+  project_creator: 项目创建者
   projects: 项目
   people: 人员
   new_issue: 创建新任务
@@ -199,3 +200,11 @@ zh:
       next: 下页
       truncate: ...
       last: 末页
+  
+  sudo:
+    dashboard: 全站管理
+    manage_user: 用户管理
+
+  view_all: 查看全部
+  creator: 创建者
+  planned_date: 预计处理日期

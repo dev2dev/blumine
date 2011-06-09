@@ -1,0 +1,26 @@
+<table border="0" cellspacing="0" cellpadding="0" class="tablesorter">
+  <thead>
+    <tr>
+      <th width="20">ID</th>
+      <th width="80"><%= t(:name) %></th>
+      <th width="100">Email</th>
+      <th width="80"><%= t(:default_locale) %></th>
+      <th width="40"><%= t('role.name') %></th>
+      <th width="200"><%= t(:created_at) %></th>
+      <th><%= t(:updated_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% collection.each do |u| %>
+    <tr>
+      <td><%= u.id %></td>
+      <td><%= link_to u.name, u %></td>
+      <td><%= u.email %></td>
+      <td><%= u.locale %></td>
+      <td><%= u.role %></td>
+      <td><%= u.created_at %></td>
+      <td><%= u.updated_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
