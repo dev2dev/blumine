@@ -1,17 +1,46 @@
 <article class="module width_full">
+  <header><h3><%= t('project.milestones') %></h3></header>
+  <div class="module_content">
+    <table cellspacing="0" class="tablesorter">
+      <thead>
+        <tr>
+          <th width="20">ID</th>
+          <th width="200"><%= t(:name) %></th>
+          <th width="100"><%= t(:due_date) %></th>
+          <th width="200"><%= t(:created_at) %></th>
+          <th><%= t(:updated_at) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.milestones.each do |milestone| %>
+          <tr>
+            <td><%= milestone.id %></td>
+            <td><%= milestone.name %></td>
+            <td><%= milestone.due_date %></td>
+            <td><%= milestone.created_at %></td>
+            <td><%= milestone.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</article>
+
+<article class="module width_full">
   <header><h3><%= t('project.tasks') %></h3></header>
   <div class="module_content">
     <table cellspacing="0" class="tablesorter">
       <thead>
         <tr>
           <th width="20">ID</th>
-          <th width="40"><%= t(:title) %></th>
+          <th width="200"><%= t(:title) %></th>
           <th width="80"><%= t('issue.workflow.current_state') %></th>
           <th width="80"><%= t(:creator) %></th>
           <th width="80"><%= t('issue.assignment.assign_to') %></th>
           <th width="80"><%= t(:milestone) %></th>
           <th width="100"><%= t(:planned_date) %></th>
-          <th width="200"><%= t(:created_at) %></th>
+          <th width="60"><%= t('issue.discussions') %></th>
+          <th width="100"><%= t(:created_at) %></th>
           <th><%= t(:updated_at) %></th>
         </tr>
       </thead>
@@ -19,12 +48,13 @@
         <% @project.issues.where(['label = ?', 'task']).limit(10).each do |task| %>
           <tr>
             <td><%= task.id %></td>
-            <td><%= link_to task.title, issue_path(task) %></td>
+            <td><%= link_to short_title(task.title), sudo_issue_path(task) %></td>
             <td><%= task.current_state_name %></td>
             <td><%= link_to task.user.name, task.user %></td>
             <td><%= task.assigned_user.nil? ? '' : link_to(task.assigned_user.name, task.assigned_user) %></td>
             <td><%= task.milestone.nil? ? '' : task.milestone.name %></td>
             <td><%= task.planned_date %></td>
+            <td><%= task.comments.any? ? task.comments.count : 0 %></td>
             <td><%= task.created_at %></td>
             <td><%= task.updated_at %></td>
           </tr>
@@ -33,3 +63,34 @@
     </table>
   </div>
 </article>
+
+<article class="module width_full">
+  <header><h3><%= t('project.docs') %></h3></header>
+  <div class="module_content">
+    <table cellspacing="0" class="tablesorter">
+      <thead>
+        <tr>
+          <th width="20">ID</th>
+          <th width="200"><%= t(:title) %></th>
+          <th width="100"><%= t(:content) %></th>
+          <th width="100"><%= t(:creator) %></th>
+          <th width="200"><%= t(:created_at) %></th>
+          <th><%= t(:updated_at) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.documents.each do |doc| %>
+          <tr>
+            <td><%= doc.id %></td>
+            <td><%= doc.title %></td>
+            <td><%= short_title(doc.content) %></td>
+            <td><%= link_to doc.user.name, doc.user %></td>
+            <td><%= doc.created_at %></td>
+            <td><%= doc.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</article>
+<div class="spacer"></div>
