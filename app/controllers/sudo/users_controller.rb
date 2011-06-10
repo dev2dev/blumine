@@ -1,8 +1,5 @@
-class Sudo::UsersController < ApplicationController
-  layout 'sudo'
+class Sudo::UsersController < SuperuserController
 
-  before_filter :must_login_first
-  before_filter :root_required
 
   def index
     @users = User.order('created_at DESC').page(params[:page])

@@ -1,4 +1,4 @@
-class Sudo::IssuesController < ApplicationController
+class Sudo::IssuesController < SuperuserController
   def show
     @issue = Issue.find(params[:id])
     breadcrumbs.add t('sudo.dashboard'), sudo_path
