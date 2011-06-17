@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_filter :must_login_first, :only => [:show, :index]
   before_filter :must_not_logged_in, :only => [:new, :create]
+  before_filter :only => [:new, :create] do |c|
+    flash[:error] = "registration closed"
+    redirect_to root_path
+  end
 
   def index
     @users = User.page(params[:page])
