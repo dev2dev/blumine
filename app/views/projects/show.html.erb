@@ -20,59 +20,25 @@
   <% end %>
 </article>
 
+<% ['task', 'bug', 'idea'].each do |tag| %>
 <article class="module width_full">
   <header>
     <h3 class="tabs_involved">
-      <%= icon 'task' %>
-      <%= t('project.tasks') %>
+      <%= icon tag %>
+      <%= t("project.#{tag}s") %>
     </h3>
   </header>
   <a name="tasks" href=""></a>
   <div class="module_content">
-    <%= render @project.issues.where(['label = ?', 'task']).limit(10) %>
+    <%= render @project.issues.where(['label = ?', tag]) %>
   </div>
   <footer>
     <ul class="actions">
-      <li><%= link_to new_project_issue_path(@project) + '/task', :class => :btn do icon('add') + t(:new_task) end %></li>
+      <li><%= link_to new_project_issue_path(@project) + "/#{tag}", :class => :btn do icon('add') + t("new_#{tag}") end %></li>
     </ul>
   </footer>
 </article>
-
-<article class="module width_full">
-  <header>
-    <h3 class="tabs_involved">
-      <%= icon 'bug' %>
-      <%= t('project.bugs') %>
-    </h3>
-  </header>
-  <a name="bugs" href=""></a>
-  <div class="module_content">
-    <%= render @project.issues.where(['label = ?', 'bug']).limit(10) %>
-  </div>
-  <footer>
-    <ul class="actions">
-      <li><%= link_to new_project_issue_path(@project) + '/bug', :class => :btn do icon('add') + t(:new_bug) end %></li>
-    </ul>
-  </footer>
-</article>
-
-<article class="module width_full">
-  <header>
-    <h3 class="tabs_involved">
-      <%= icon 'idea' %>
-      <%= t('project.ideas') %>
-    </h3>
-  </header>
-  <a name="ideas" href=""></a>
-  <div class="module_content">
-    <%= render @project.issues.where(['label = ?', 'idea']).limit(10) %>
-  </div>
-  <footer>
-    <ul class="actions">
-      <li><%= link_to new_project_issue_path(@project) + '/idea', :class => :btn do icon('add') + t(:new_idea) end %></li>
-    </ul>
-  </footer>
-</article>
+<% end %>
 
 <article class="module width_full">
   <header>

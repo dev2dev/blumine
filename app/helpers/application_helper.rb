@@ -102,7 +102,7 @@ module ApplicationHelper
   end
   
   def short_title(title)
-    max_length = 15
+    max_length = 40
     if title.mb_chars.length > max_length
       title = title.mb_chars[0..max_length].to_s + '...'
     end
